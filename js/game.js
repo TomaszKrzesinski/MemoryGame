@@ -1,5 +1,4 @@
 var game = (function () {
-
     var initialNumberOfPieces = 4,
         initialNumberOfAllowedMistakes = 0,
         currentNumberOfPieces,
@@ -47,7 +46,7 @@ var game = (function () {
             piecesAssigned = 0;
             while(piecesAssigned<numberOfPiecesToGuess) {
                 randomPositionInTable = Math.floor(Math.random() * currentNumberOfPieces);
-                if(pieces[randomPositionInTable].toGuess == false) {
+                if(pieces[randomPositionInTable].toGuess === false) {
                     pieces[randomPositionInTable].toGuess = true;
                     piecesAssigned = piecesAssigned + 1;
                 }
@@ -58,21 +57,23 @@ var game = (function () {
         shoot = function(id) {
             var allPiecesHit = true,
                 i;
-            if(pieces[id].toGuess == true) {
-                if(shots[id].shoted == false) {
+            if(pieces[id].toGuess === true) {
+                if(shots[id].shoted === false) {
                     shots[id].shoted = true;
+                    statistics.addAccurateShoot(getNumberOfPieces());
                     for(i=0; i<pieces.length; i++) {
-                        if(pieces[i].toGuess==true && shots[i].shoted == false){
+                        if(pieces[i].toGuess===true && shots[i].shoted === false){
                             allPiecesHit = false;
                         }
                     }
-                    if(allPiecesHit == true) {
+                    if(allPiecesHit === true) {
                         return "NEXTLEVEL";
                     }
                     return "OK";
                 }
                 else {
                     numberOfMistakes = numberOfMistakes + 1;
+                    statistics.addMissedShoot(getNumberOfPieces());
                     if(numberOfMistakes>numberOfAllowedMistakes) {
                         return "GAMEOVER";
                     }
@@ -80,6 +81,7 @@ var game = (function () {
                 }
             } else {
                 numberOfMistakes = numberOfMistakes + 1;
+                statistics.addMissedShoot(getNumberOfPieces());
                 if(numberOfMistakes>numberOfAllowedMistakes) {
                     return "GAMEOVER";
                 }
@@ -99,7 +101,7 @@ var game = (function () {
             var incrementedNumberOfPieces = ++currentNumberOfPieces;
             startGame({
                 numberOfPieces: incrementedNumberOfPieces,
-                numberOfAllowedMistakes: initialNumberOfAllowedMistakes
+                numberOfAllowedMistakes: numberOfAllowedMistakes
             });
         },
 
@@ -110,7 +112,7 @@ var game = (function () {
         restartLevel = function () {
             startGame({
                 numberOfPieces: currentNumberOfPieces,
-                numberOfAllowedMistakes: initialNumberOfAllowedMistakes
+                numberOfAllowedMistakes: numberOfAllowedMistakes
             });
         };
 

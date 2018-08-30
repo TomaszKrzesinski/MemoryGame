@@ -1,6 +1,11 @@
 var view = (function () {
     var getInitialNumberOfPieces = function () {
-            return document.getElementById("initNumberOfPieces").value;
+            var numberOfPieces =  document.getElementById("initNumberOfPieces").value;
+            if(numberOfPieces<4) {
+                numberOfPieces = 4;
+                document.getElementById("initNumberOfPieces").value = 4;
+            }
+            return numberOfPieces;
         },
 
         getDelayTime = function() {
@@ -28,11 +33,11 @@ var view = (function () {
 
             clearGamePanel();
             pieces = controller.showPieces();
-
+            deactivateButtons();
             for(i=0; i<pieces.length; i++) {
                 var id="piece_"+i;
                 content = document.createElement("div");
-                if(pieces[i].toGuess == true) {
+                if(pieces[i].toGuess === true) {
                     content.setAttribute("class", "bluePiece");
                 } else {
                     content.setAttribute("class", "piecedisabled");
@@ -41,9 +46,9 @@ var view = (function () {
                 content.setAttribute("id", id);
                 content.setAttribute("onclick", "controller.shoot("+i+")");
                 gamePanel.appendChild(content);
-
-                setTimeout(releasePieces, getDelayTime());
             }
+            setTimeout(releasePieces, getDelayTime());
+
         },
 
         releasePieces = function() {
@@ -52,19 +57,20 @@ var view = (function () {
             for(i=0; i<pieces.length; i++) {
                 pieces[i].setAttribute("class", "piece");
             }
+            activateButtons();
         },
 
         changePieceState = function(id, shootResult) {
             var piece = document.getElementById("piece_" + id);
-            if (shootResult == "OK") {
+            if (shootResult === "OK") {
                 piece.setAttribute("class", "hitedPiece");
-            } else if(shootResult == "NEXTLEVEL") {
+            } else if(shootResult === "NEXTLEVEL") {
                 piece.setAttribute("class", "hitedPiece");
-            } else if(shootResult == "DOUBLESHOT") {
+            } else if(shootResult === "DOUBLESHOT") {
                 piece.setAttribute("class", "missedPiece");
-            } else if(shootResult == "MISSED") {
+            } else if(shootResult === "MISSED") {
                 piece.setAttribute("class", "missedPiece");
-            } else if(shootResult == "GAMEOVER") {
+            } else if(shootResult === "GAMEOVER") {
                  piece.setAttribute("class", "missedPiece");
             }
         },
@@ -73,7 +79,7 @@ var view = (function () {
             var i,
                 piece;
             for(i=0; i<pieces.length; i++) {
-                if(pieces[i].toGuess==true) {
+                if(pieces[i].toGuess===true) {
                     piece = document.getElementById("piece_"+i);
                     piece.setAttribute("class", "bluePiece");
                 }
@@ -83,6 +89,35 @@ var view = (function () {
         changeCommunicate = function (msg) {
             var communicate = document.getElementById("communicate");
             communicate.innerHTML = msg;
+        },
+
+        activateButtons = function () {
+            document.getElementById("startButton").disabled = false;
+            document.getElementById("restartLevelButton").disabled = false;
+        },
+
+        deactivateButtons = function () {
+            document.getElementById("startButton").disabled = true;
+            document.getElementById("restartLevelButton").disabled = true;
+        },
+
+        updateStatistics = function (stats) {
+            var list = document.getElementById("statsList"),
+                clearList = function () {
+                    while(list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                },
+                addToList = function(element, index, array) {
+                    var li = document.createElement("li");
+                    li.appendChild(document.createTextNode(
+                        element.level+": "+element.accurateShoots+", "+element.missedShoots+", "+
+                        (100*element.accurateShoots/(element.accurateShoots+element.missedShoots)) +"%"
+                    ));
+                    list.appendChild(li);
+                };
+            clearList();
+            stats.forEach(addToList);
         };
 
 
@@ -94,6 +129,7 @@ var view = (function () {
         'renderPieces': renderPieces,
         'changePieceState': changePieceState,
         'renderBlue': renderBlue,
-        'changeCommunicate': changeCommunicate
+        'changeCommunicate': changeCommunicate,
+        'updateStatistics': updateStatistics
     }
 })();

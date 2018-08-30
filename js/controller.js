@@ -16,19 +16,19 @@ var controller = function () {
         },
 
         shoot = function (id) {
-            var shotresult;
+            var shotResult;
 
-            shotresult = game.shoot(id);
-            view.changePieceState(id, shotresult);
-            if(shotresult == "GAMEOVER") {
+            shotResult = game.shoot(id);
+            view.updateStatistics(statistics.getStats());
+            view.changePieceState(id, shotResult);
+            if(shotResult === "GAMEOVER") {
                 gameOver();
                 view.changeCommunicate("You lose. Starting new game in 3 seconds.");
                 setTimeout(startNewGameAfter3Seconds, 3000);
-            } else if(shotresult == "NEXTLEVEL") {
+            } else if(shotResult === "NEXTLEVEL") {
                 view.changeCommunicate("Excellent. Starting new level in 3 seconds.");
                 setTimeout(nextLevel, 3000);
             }
-
         },
 
         showPieces = function () {

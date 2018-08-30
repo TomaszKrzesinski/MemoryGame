@@ -31,22 +31,40 @@ describe('Game', function () {
     });
 
     it('should calculate number of pieces to guess when number of pieces is 4', function () {
-        var numberOfPiecesToGuess;
-        numberOfPiecesToGuess = game.calculateNumberOfPiecesToGuess(4);
+        var numberOfPiecesToGuess,
+            config = {
+                numberOfPieces: 4,
+                numberOfAllowedMistakes: 1
+            };
+
+        game.startGame(config);
+        numberOfPiecesToGuess = game.getNumberOfPiecesToGuess();
 
         expect(numberOfPiecesToGuess).toBe(1);
     });
 
     it('should calculate number of pieces to guess when number of pieces is 6', function () {
-        var numberOfPiecesToGuess;
-        numberOfPiecesToGuess = game.calculateNumberOfPiecesToGuess(6);
+        var numberOfPiecesToGuess,
+            config = {
+                numberOfPieces: 6,
+                numberOfAllowedMistakes: 1
+            };
+
+        game.startGame(config);
+        numberOfPiecesToGuess = game.getNumberOfPiecesToGuess();
 
         expect(numberOfPiecesToGuess).toBe(2);
     });
 
     it('should calculate number of pieces to guess when number of pieces is 14', function () {
-        var numberOfPiecesToGuess;
-        numberOfPiecesToGuess = game.calculateNumberOfPiecesToGuess(14);
+        var numberOfPiecesToGuess,
+            config = {
+                numberOfPieces: 14,
+                numberOfAllowedMistakes: 1
+            };
+
+        game.startGame(config);
+        numberOfPiecesToGuess = game.getNumberOfPiecesToGuess();
 
         expect(numberOfPiecesToGuess).toBe(6);
     });
@@ -64,7 +82,7 @@ describe('Game', function () {
         pieces = game.showPieces();
 
         for(i=0; i<pieces.length; i++) {
-            if(pieces[i].toGuess == true) {
+            if(pieces[i].toGuess === true) {
                 resultOfShoot = game.shoot(i);
                 break;
             }
@@ -87,7 +105,7 @@ describe('Game', function () {
 
 
         for(i=0; i<pieces.length; i++) {
-            if(pieces[i].toGuess == true) {
+            if(pieces[i].toGuess === true) {
                 game.shoot(i);
                 resultOfShoot = game.shoot(i);
                 break;
