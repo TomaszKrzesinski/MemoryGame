@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Memory game</title>
+        <link rel="stylesheet" type="text/css" href="css/piecestyle.css">
+        <link rel="stylesheet" type="text/css" href="css/panelstyle.css">
+        <link rel="stylesheet" type="text/css" href="css/input.css">
+        <script src="js/game.js"></script>
+        <script src="js/view.js"></script>
+        <script src="js/controller.js"></script>
+    </head>
+    <body>
+        <header>
+            <h2 align="center">Memory Game</h2>
+            <h3 align="center" id="communicate">Start new game!</h3>
+        </header>
+
+        <div id="controlpanel" class = "controlpanel">
+            <button onclick="controller.startGame()">START GAME!</button> <button onclick="controller.restartLevel()">RESTART LEVEL!</button><br><br>
+            Initial number of pieces:<br>
+            <input type="number", class="input", value="4", id="initNumberOfPieces"><br><br>
+            Delay time [ms]:<br>
+            <input type="number", class="input", value="2000", id="delayTimeInput"><br><br>
+            Mistakes allowed:<br>
+            <input type="number", class="input", value="0", id="mistakesAllowedInput"><br><br>
+        </div>
+        <div id="gamepanel" class = "gamepanel">
+        </div>
+    </body>
+</html>

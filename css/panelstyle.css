@@ -1,0 +1,27 @@
+.controlpanel {
+    background: lightcyan;
+    border: thin black;
+    width: 18vw;
+    height: 85vh;
+    border-radius: 30px;
+    display: inline-block;
+    padding: 20px;
+    position: fixed;
+    margin: 10px;
+    top: 100px;
+    left: 0px;
+}
+
+.gamepanel {
+    background: lightcyan;
+    border: thin black;
+    width: 75vw;
+    height: 85vh;
+    border-radius: 30px;
+    padding: 20px;
+    display:  inline-block;
+    position: fixed;
+    margin: 10px;
+    top: 100px;
+    right: 0;
+}
