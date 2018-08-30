@@ -1,9 +1,7 @@
 .piece {
     background: gray;
     border: thin black;
-    width: 50px;
-    height: 50px;
-    border-radius: 20%;
+    border-radius: 15px;
     margin: 3px;
     display: inline-block;
 }
@@ -11,9 +9,7 @@
 .piecedisabled {
     background: gray;
     border: thin black;
-    width: 50px;
-    height: 50px;
-    border-radius: 20%;
+    border-radius: 15px;
     margin: 3px;
     display: inline-block;
     pointer-events:none;
@@ -22,9 +18,7 @@
 .piece:hover {
     background: lightgray;
     border: thin black;
-    width: 50px;
-    height: 50px;
-    border-radius: 20%;
+    border-radius: 15px;
     margin: 3px;
     display: inline-block;
 }
@@ -32,9 +26,7 @@
 .hitedPiece {
     background: green;
     border: thin black;
-    width: 50px;
-    height: 50px;
-    border-radius: 20%;
+    border-radius: 15px;
     margin: 3px;
     display: inline-block;
 }
@@ -42,9 +34,7 @@
 .missedPiece {
     background: red;
     border: thin black;
-    width: 50px;
-    height: 50px;
-    border-radius: 20%;
+    border-radius: 15px;
     margin: 3px;
     display: inline-block;
 }
@@ -52,9 +42,7 @@
 .bluePiece {
     background: blue;
     border: thin black;
-    width: 50px;
-    height: 50px;
-    border-radius: 20%;
+    border-radius: 15px;
     margin: 3px;
     display: inline-block;
     pointer-events:none;

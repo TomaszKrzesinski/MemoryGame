@@ -32,7 +32,9 @@ var statistics = (function () {
         },
 
         getStats = function () {
-            return shots;
+            return shots.sort(function (a ,b) {
+                return (a.level-b.level);
+            });
         };
 
     return {

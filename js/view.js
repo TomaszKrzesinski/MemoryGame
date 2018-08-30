@@ -47,6 +47,7 @@ var view = (function () {
                 content.setAttribute("onclick", "controller.shoot("+i+")");
                 gamePanel.appendChild(content);
             }
+            strechPieces();
             setTimeout(releasePieces, getDelayTime());
 
         },
@@ -118,6 +119,21 @@ var view = (function () {
                 };
             clearList();
             stats.forEach(addToList);
+        },
+
+        strechPieces = function () {
+            var gamePanel = document.getElementById("gamepanel"),
+                piece = document.getElementById("piece_1"),
+                pieces = gamePanel.children;
+                numberOfPieces = controller.getNumberOfPieces(),
+                numberOfPiecesInRow = Math.ceil(Math.sqrt(numberOfPieces)),
+                pieceTotalWidth = Math.floor((gamePanel.clientWidth-40)/numberOfPiecesInRow),
+                pieceTotalHeight = Math.floor((gamePanel.clientHeight-40)/numberOfPiecesInRow),
+                pieceContentWidth = pieceTotalWidth-6,
+                pieceContentHeight = pieceTotalHeight-6;
+                for(var i=0; i<pieces.length; i++) {
+                    pieces[i].setAttribute("style","width: "+pieceContentWidth+"px;"+"height: "+pieceContentHeight+"px;");
+                }
         };
 
 
