@@ -113,7 +113,7 @@ var view = (function () {
                     var li = document.createElement("li");
                     li.appendChild(document.createTextNode(
                         element.level+": "+element.accurateShoots+", "+element.missedShoots+", "+
-                        (100*element.accurateShoots/(element.accurateShoots+element.missedShoots)) +"%"
+                        Math.round(100*element.accurateShoots/(element.accurateShoots+element.missedShoots)) +"%"
                     ));
                     list.appendChild(li);
                 };
