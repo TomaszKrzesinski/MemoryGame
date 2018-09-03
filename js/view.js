@@ -92,11 +92,13 @@ var view = (function () {
         activateButtons = function () {
             document.getElementById("startButton").disabled = false;
             document.getElementById("restartLevelButton").disabled = false;
+            document.getElementById("addPieceButton").disabled = false;
         },
 
         deactivateButtons = function () {
             document.getElementById("startButton").disabled = true;
             document.getElementById("restartLevelButton").disabled = true;
+            document.getElementById("addPieceButton").disabled = true;
         },
 
         updateStatistics = function (stats) {

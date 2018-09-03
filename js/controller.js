@@ -55,6 +55,19 @@ var controller = function () {
             game.restartLevel();
             view.changeCommunicate("Level restarted. Number of pieces to guess: "+game.getNumberOfPiecesToGuess());
             view.renderPieces();
+        },
+
+        addPiece = function () {
+            var increasedNumberOfPieces = controller.getNumberOfPieces()+1,
+                initialNumberOfAllowedMistakes = view.getInitialMistakesAllowed();
+
+            game.startGame({
+                numberOfPieces: increasedNumberOfPieces,
+                numberOfAllowedMistakes: initialNumberOfAllowedMistakes
+            });
+
+            view.changeCommunicate("Level restarted. Number of pieces to guess: "+game.getNumberOfPiecesToGuess());
+            view.renderPieces(increasedNumberOfPieces);
         };
 
 
@@ -64,6 +77,7 @@ var controller = function () {
         'getNumberOfPieces': getNumberOfPieces,
         'startNewGameAfter3Seconds': startNewGameAfter3Seconds,
         'shoot': shoot,
-        'restartLevel': restartLevel
+        'restartLevel': restartLevel,
+        'addPiece': addPiece
     }
 }();

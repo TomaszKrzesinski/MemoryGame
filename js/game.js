@@ -116,7 +116,6 @@ var game = (function () {
             });
         };
 
-
     return {
         'startGame': startGame,
         'getNumberOfPiecesToGuess': getNumberOfPiecesToGuess,
