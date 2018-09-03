@@ -22,18 +22,13 @@ var view = (function () {
                 content,
                 j,
                 piece,
-                pieces,
-
-                clearGamePanel = function() {
-                    while(document.getElementById("gamepanel").hasChildNodes()){
-                        piece = document.getElementById("gamepanel").firstChild;
-                        document.getElementById("gamepanel").removeChild(piece);
-                    }
-                };
+                pieces;
 
             clearGamePanel();
             pieces = controller.showPieces();
             deactivateButtons();
+
+
             for(i=0; i<pieces.length; i++) {
                 var id="piece_"+i;
                 content = document.createElement("div");
@@ -47,6 +42,7 @@ var view = (function () {
                 content.setAttribute("onclick", "controller.shoot("+i+")");
                 gamePanel.appendChild(content);
             }
+
             strechPieces();
             setTimeout(releasePieces, getDelayTime());
 
@@ -67,6 +63,7 @@ var view = (function () {
                 piece.setAttribute("class", "hitedPiece");
             } else if(shootResult === "NEXTLEVEL") {
                 piece.setAttribute("class", "hitedPiece");
+
             } else if(shootResult === "DOUBLESHOT") {
                 piece.setAttribute("class", "missedPiece");
             } else if(shootResult === "MISSED") {
@@ -134,8 +131,14 @@ var view = (function () {
                 for(var i=0; i<pieces.length; i++) {
                     pieces[i].setAttribute("style","width: "+pieceContentWidth+"px;"+"height: "+pieceContentHeight+"px;");
                 }
-        };
+        },
 
+        clearGamePanel = function() {
+            while(document.getElementById("gamepanel").hasChildNodes()){
+                piece = document.getElementById("gamepanel").firstChild;
+                document.getElementById("gamepanel").removeChild(piece);
+            }
+        };
 
 
     return {
